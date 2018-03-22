@@ -141,13 +141,13 @@ class LogoutRequest extends AbstractRequest
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
-        $result = $this->createElement('LogoutRequest', SamlConstants::NS_PROTOCOL, $parent, $context);
+        $result = $this->createElement('samlp:LogoutRequest', SamlConstants::NS_PROTOCOL, $parent, $context);
 
         parent::serialize($result, $context);
 
         $this->attributesToXml(array('Reason', 'NotOnOrAfter'), $result);
 
-        $this->singleElementsToXml(array('NameID', 'SessionIndex'), $result, $context, SamlConstants::NS_PROTOCOL);
+        $this->singleElementsToXml(array('NameID', 'samlp:SessionIndex'), $result, $context, SamlConstants::NS_PROTOCOL);
 
         // must be last in order signature to include them all
         $this->singleElementsToXml(array('Signature'), $result, $context);
